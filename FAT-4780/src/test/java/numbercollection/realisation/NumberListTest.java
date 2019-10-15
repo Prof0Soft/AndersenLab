@@ -118,10 +118,12 @@ public class NumberListTest {
 
     @Test
     public void addMoreCapacity(){
+        int expectedSize = 50;
         NumberListCollection<Double> list2 = new NumberList<>();
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < expectedSize; i++) {
             list2.add(4D);
         }
+        Assert.assertEquals(expectedSize, list2.size());
     }
 
 }

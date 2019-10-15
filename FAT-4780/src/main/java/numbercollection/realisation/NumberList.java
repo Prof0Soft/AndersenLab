@@ -125,7 +125,6 @@ public class NumberList<E extends Number> extends AbstractList<E> implements Num
      * return the value removed.
      */
     private void fastRemove(Object[] es, int i) {
-        modCount++;
         final int newSize;
         if ((newSize = size - 1) > i)
             System.arraycopy(es, i + 1, es, i, newSize - i);
@@ -233,7 +232,6 @@ public class NumberList<E extends Number> extends AbstractList<E> implements Num
      */
     @Override
     public E average() {
-
         if (elementData[0] instanceof Integer) {
             return (E) averageInteger();
         } else if (elementData[0] instanceof Double) {
@@ -241,7 +239,6 @@ public class NumberList<E extends Number> extends AbstractList<E> implements Num
         } else if (elementData[0] instanceof Long) {
             return (E) averageLong();
         }
-
         return null;
     }
 
