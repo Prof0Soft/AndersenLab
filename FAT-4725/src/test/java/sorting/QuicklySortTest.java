@@ -1,19 +1,17 @@
-import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.junit.Arquillian;
-import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.asset.EmptyAsset;
-import org.jboss.shrinkwrap.api.spec.JavaArchive;
-import org.junit.runner.RunWith;
+package sorting;
 
-import static org.junit.Assert.*;
+import org.junit.Assert;
+import org.junit.Test;
 
-@RunWith(Arquillian.class)
+import java.util.Arrays;
+
 public class QuicklySortTest {
-    @Deployment
-    public static JavaArchive createDeployment() {
-        return ShrinkWrap.create(JavaArchive.class)
-                .addClass(sorting.QuicklySort.class)
-                .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
-    }
 
+    @Test
+    public void sort() {
+        Integer[] arr = {3, 8, 1, 5, 10};
+        Integer[] expectResult = {1, 3, 5, 8, 10};
+        Integer[] result = QuicklySort.sort(arr);
+        Assert.assertArrayEquals(expectResult, result);
+    }
 }

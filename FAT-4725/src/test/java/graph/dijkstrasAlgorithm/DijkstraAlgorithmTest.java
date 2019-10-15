@@ -1,13 +1,12 @@
 package graph.dijkstrasAlgorithm;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.*;
 
-import static org.junit.Assert.*;
-
-public class DijkstrasAlgorithmTest {
+public class DijkstraAlgorithmTest {
 
     private Node start;
     private Node a;
@@ -39,7 +38,12 @@ public class DijkstrasAlgorithmTest {
 
     @Test
     public void search() {
-        DijkstrasAlgorithm dijkstrasAlgorithm = new DijkstrasAlgorithm(graph);
-        System.out.println(dijkstrasAlgorithm.search());
+        DijkstraAlgorithm dijkstraAlgorithm = new DijkstraAlgorithm(graph);
+        Map<Node, Node> expectedResult = new HashMap<>();
+        expectedResult.put(a, b);
+        expectedResult.put(b, start);
+        expectedResult.put(end, a);
+
+        Assert.assertEquals(expectedResult.toString(), dijkstraAlgorithm.search().toString());
     }
 }

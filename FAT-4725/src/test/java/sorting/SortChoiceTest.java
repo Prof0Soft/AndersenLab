@@ -1,19 +1,16 @@
-import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.junit.Arquillian;
-import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.asset.EmptyAsset;
-import org.jboss.shrinkwrap.api.spec.JavaArchive;
-import org.junit.runner.RunWith;
+package sorting;
 
-import static org.junit.Assert.*;
+import org.junit.Assert;
+import org.junit.Test;
 
-@RunWith(Arquillian.class)
+
 public class SortChoiceTest {
-    @Deployment
-    public static JavaArchive createDeployment() {
-        return ShrinkWrap.create(JavaArchive.class)
-                .addClass(sorting.SortChoice.class)
-                .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
-    }
 
+    @Test
+    public void sortChoice() {
+        Integer[] arr = {12, 5, 6, 8, 4, 1};
+        Integer[] expectArr = {1, 4, 5, 6, 8, 12};
+        SortChoice sortChoice = new SortChoice();
+        Assert.assertArrayEquals(expectArr, sortChoice.sort(arr));
+    }
 }

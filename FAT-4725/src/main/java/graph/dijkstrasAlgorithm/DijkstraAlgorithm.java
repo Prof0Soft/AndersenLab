@@ -4,9 +4,23 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class DijkstrasAlgorithm {
+/**
+ * Dijkstra's algorithm
+ */
+public class DijkstraAlgorithm {
 
-    public DijkstrasAlgorithm(final LinkedHashMap<Node, Map<Node, Integer>> graph) {
+    private Map<Node, Map<Node, Integer>> graph;
+    private Map<Node, Integer> coasts = new HashMap<>();
+    private Map<Node, Node> parents = new HashMap<>();
+    private Node startNode = null;
+    private Node endNode = null;
+
+    /**
+     * Constructor for init object.
+     *
+     * @param graph general graph.
+     */
+    public DijkstraAlgorithm(final LinkedHashMap<Node, Map<Node, Integer>> graph) {
         this.graph = graph;
         initStartEndNode();
         initParentsTable();
@@ -16,15 +30,12 @@ public class DijkstrasAlgorithm {
         coasts.put(endNode, Integer.MAX_VALUE);
     }
 
-    private Map<Node, Map<Node, Integer>> graph;
-    private Map<Node, Integer> coasts = new HashMap<>();
-    private Map<Node, Node> parents = new HashMap<>();
-    private Node startNode = null;
-    private Node endNode = null;
-
+    /**
+     * Searching faster way in graph by Dijkstra algorithm.
+     *
+     * @return map present way by nodes.
+     */
     public Map<Node, Node> search() {
-        // childes of start Node.
-//        Map<Node, Integer> childNode = graph.get(startNode);
         Node parenNode = startNode;
         Node lowestCoastNode = indLowestCostNode(coasts);
 
@@ -40,25 +51,14 @@ public class DijkstrasAlgorithm {
                         coasts.put(child, newCoast);
                         parents.put(child, lowestCoastNode);
                     }
-                    //close Node if pass for the Node
-                   /* if (child.equals(endNode)) {
-                    }*/
                 }
                 lowestCoastNode.setProcessed(true);
             }
             lowestCoastNode = indLowestCostNode(coasts);
+            updateCoastTable(graph.get(startNode));
         }
 
         return parents;
-    }
-
-    private boolean isProcess() {
-        for (Map.Entry<Node, Integer> set : coasts.entrySet()) {
-            if (!set.getKey().getProcessed() && !set.getKey().getEnd()) {
-                return true;
-            }
-        }
-        return false;
     }
 
     /**
