@@ -1,0 +1,12 @@
+create table REVIEW
+(
+    ID         INTEGER default (NEXT VALUE FOR TRAVELAGENCY.SYSTEM_SEQUENCE_D4C56755_0061_4E19_9873_511A8A2DE825) auto_increment,
+    IDHOTEL    INTEGER      not null,
+    TEXTREVIEW VARCHAR(500) not null,
+    constraint REVIEW_PK
+        primary key (ID)
+);
+
+INSERT INTO TRAVELAGENCY.REVIEW (ID, IDHOTEL, TEXTREVIEW) VALUES (1, 1, 'Cool hotel and spa procedure');
+INSERT INTO TRAVELAGENCY.REVIEW (ID, IDHOTEL, TEXTREVIEW) VALUES (2, 1, 'Not bad');
+INSERT INTO TRAVELAGENCY.REVIEW (ID, IDHOTEL, TEXTREVIEW) VALUES (3, 2, 'Worst hotel in my experience');

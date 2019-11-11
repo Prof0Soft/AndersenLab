@@ -1,0 +1,10 @@
+create table "ORDER"
+(
+    ID        INTEGER default (NEXT VALUE FOR TRAVELAGENCY.SYSTEM_SEQUENCE_E50CC2B8_0192_47B8_BC07_192B32498DE5) auto_increment,
+    NAMEORDER VARCHAR(20) not null,
+    IDTOUR    INTEGER     not null,
+    PRICE     DOUBLE      not null,
+    IDUSER    INTEGER     not null
+);
+
+INSERT INTO TRAVELAGENCY."ORDER" (ID, NAMEORDER, IDTOUR, PRICE, IDUSER) VALUES (1, 'For famely', 2, 50, 1);
