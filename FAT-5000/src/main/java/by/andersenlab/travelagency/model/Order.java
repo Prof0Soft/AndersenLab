@@ -1,8 +1,6 @@
 package by.andersenlab.travelagency.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -10,7 +8,9 @@ import lombok.NoArgsConstructor;
 public class Order {
     private Integer id;
     private String nameOrder;
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private User userId;
     private Double price;
     private Integer idTour;
-    private Integer idUser;
 }

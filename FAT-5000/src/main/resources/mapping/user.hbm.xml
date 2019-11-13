@@ -1,0 +1,21 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="by.andersenlab.travelagency.model.User" table="USER">
+
+        <id name="idUser" column="idUser" type="int">
+            <generator class="native"/>
+        </id>
+
+        <property name="nameUser" column="nameUser" type="string"/>
+
+        <set name="orders" cascade="all-delete-orphan" table="USER" lazy="false" fetch="select">
+            <key column="idUser"></key>
+            <one-to-many class="by.andersenlab.travelagency.model.Order" />
+        </set>
+
+    </class>
+</hibernate-mapping>
