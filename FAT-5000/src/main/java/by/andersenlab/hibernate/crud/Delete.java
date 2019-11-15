@@ -6,31 +6,13 @@ import by.andersenlab.travelagency.model.User;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-public class Create {
+public class Delete {
 
-    public User insertNewUser(User user) {
-        Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory().getCurrentSession()) {
-            transaction = session.beginTransaction();
-            session.save(user);
-            transaction.commit();
-            session.close();
-
-            return new Read().getUser(user.getNameUser());
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public Order insertNewOrder(Order order) {
+    public void deleteOrder(Order order) {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            session.save(order);
+            session.delete(order);
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
@@ -38,6 +20,19 @@ public class Create {
             }
             e.printStackTrace();
         }
-        return null;
+    }
+
+    public void deleteUser(User user) {
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+            session.delete(user);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
     }
 }
