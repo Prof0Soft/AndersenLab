@@ -1,0 +1,3 @@
+For compiler needed files.
+
+>>>> javac TestLoadModule.java StaticClassForLoad.java <<<<<
