@@ -24,7 +24,7 @@ class CreateTest {
         Order order = new Order(null, "First order", userNew, 20D, null);
         new Create().insertNewOrder(order);
 
-        List<User> users = new Read().getAllUsers();
+        List<User> users = new Read(User.class).getAll();
 
         Assertions.assertNotNull(new Read().getUser(nameUser));
     }

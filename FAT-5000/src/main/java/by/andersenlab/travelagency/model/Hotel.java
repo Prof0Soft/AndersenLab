@@ -1,8 +1,6 @@
 package by.andersenlab.travelagency.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -27,6 +25,8 @@ public class Hotel {
     @OneToMany(mappedBy = "idHotelReview", fetch = FetchType.EAGER)
     private Set<Review> reviews = new HashSet<>();
 
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @OneToOne(mappedBy = "idHotel")
     private Tour tourId;
 }

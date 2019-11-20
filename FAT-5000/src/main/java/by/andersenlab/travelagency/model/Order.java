@@ -28,6 +28,9 @@ public class Order {
     @Column(name = "PRICE")
     private Double price;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<Tour> tours = new HashSet<>();
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @ManyToOne
+    @JoinColumn(name = "IDTOUR")
+    private Tour tour;
 }

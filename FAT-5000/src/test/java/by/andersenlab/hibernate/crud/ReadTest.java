@@ -20,15 +20,15 @@ class ReadTest {
 
     @Test
     void getAllUsers() {
-        int oldCountUsers = new Read().getAllUsers().size();
+        int oldCountUsers = new Read(User.class).getAll().size();
         new Create().insertNewUser(new User(null, nameUser + 1, null));
-        List<User> users = new Read().getAllUsers();
+        List<User> users = new Read(User.class).getAll();
         Assertions.assertEquals(oldCountUsers + 1, users.size());
     }
 
     @Test
     void getAllUsersWithOrderDependency() {
-        int oldCountUsers = new Read().getAllUsers().size();
+        int oldCountUsers = new Read(User.class).getAll().size();
         int oldCountOrdersForUser = new Read().getUser(nameUser).getOrders().size();
 
         String nameOrder = "Test order for dependency";
@@ -38,7 +38,7 @@ class ReadTest {
 
         new Create().insertNewUser(new User(null, nameUser + 1, null));
 
-        List<User> users = new Read().getAllUsers();
+        List<User> users = new Read(User.class).getAll();
 
         User userWithDepend = new Read().getUser(nameUser);
         Optional<Order> order = userWithDepend.getOrders().stream()

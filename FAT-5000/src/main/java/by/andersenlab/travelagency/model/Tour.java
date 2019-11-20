@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -28,7 +29,6 @@ public class Tour {
     @JoinColumn(name = "HOTELID")
     private Hotel idHotel;
 
-    @ManyToOne
-    @JoinColumn(name = "IDORDER")
-    private Order order;
+    @OneToMany(mappedBy = "tour", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Order> orders;
 }

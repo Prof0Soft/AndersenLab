@@ -3,17 +3,23 @@ package by.andersenlab.hibernate.crud;
 import by.andersenlab.hibernate.HibernateUtil;
 import by.andersenlab.travelagency.model.Order;
 import by.andersenlab.travelagency.model.User;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
 import javax.persistence.NoResultException;
 import java.util.List;
 
-public class Read {
+@NoArgsConstructor
+@AllArgsConstructor
+public class Read<T> {
+    private Class<T> ownClassType;
 
-    public List<User> getAllUsers() {
+    public List<T> getAll() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            return session.createQuery("from User", User.class).list();
+            return (List<T>) session.createQuery("from " + ownClassType.getSimpleName(),
+                    ownClassType).getResultList();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -64,14 +70,5 @@ public class Read {
             e.printStackTrace();
             return null;
         }
-    }
-
-    public List<Order> getAllOrders() {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            return session.createQuery("from Order", Order.class).list();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 }

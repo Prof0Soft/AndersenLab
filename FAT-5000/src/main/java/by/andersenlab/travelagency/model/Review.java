@@ -1,8 +1,6 @@
 package by.andersenlab.travelagency.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -18,6 +16,8 @@ public class Review {
     @Column(name = "TEXTREVIEW")
     private String textReview;
 
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @ManyToOne
     @JoinColumn(name = "IDHOTEL")
     private Hotel idHotelReview;

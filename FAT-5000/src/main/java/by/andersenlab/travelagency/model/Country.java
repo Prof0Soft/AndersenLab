@@ -1,8 +1,6 @@
 package by.andersenlab.travelagency.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -18,6 +16,8 @@ public class Country {
     @Column(name = "NAMECOUNTRY")
     private String nameCountry;
 
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @OneToOne(mappedBy = "idCountryTour")
     private Tour tour;
 }
