@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <bean id="readCRUD" class="by.andersenlab.hibernate.crud.impl.ReadImpl">
+        <property name="hibernateUtil" ref="hibUtil"/>
+    </bean>
+
+    <bean id="createCRUD" class="by.andersenlab.hibernate.crud.impl.CreateImpl">
+        <property name="hibernateUtil" ref="hibUtil"/>
+        <property name="read" ref="readCRUD"/>
+    </bean>
+
+    <bean id="hibUtil" class="by.andersenlab.hibernate.HibernateUtilImpl"/>
+
+    <bean id="deleteCRUD" class="by.andersenlab.hibernate.crud.impl.DeleteImpl">
+        <property name="hibernateUtil" ref="hibUtil"/>
+    </bean>
+
+    <bean id="updateCRUD" class="by.andersenlab.hibernate.crud.impl.UpdateImpl">
+        <property name="hibernateUtil" ref="hibUtil"/>
+    </bean>
+</beans>

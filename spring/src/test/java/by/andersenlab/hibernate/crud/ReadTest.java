@@ -1,46 +1,57 @@
 package by.andersenlab.hibernate.crud;
 
+import by.andersenlab.hibernate.crud.impl.CreateImpl;
+import by.andersenlab.hibernate.crud.impl.ReadImpl;
 import by.andersenlab.travelagency.model.Order;
 import by.andersenlab.travelagency.model.User;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.List;
 import java.util.Optional;
 
 class ReadTest {
+    private ApplicationContext context;
+    private Read read;
+    private Create create;
+
     private static String nameUser = "Sergey";
 
-    @BeforeAll
-    private static void setUp() {
+    @BeforeEach
+    private void setUp() {
+        context = new ClassPathXmlApplicationContext("aplicationContextForTests.xml");
+        read = (Read) context.getBean("readCRUD");
+        create = (Create) context.getBean("createCRUD");
         User user = new User(null, nameUser, null);
-        new Create().insertNewUser(user);
+        create.insertNewUser(user);
     }
 
     @Test
     void getAllUsers() {
-        int oldCountUsers = new Read().getAllUsers().size();
-        new Create().insertNewUser(new User(null, nameUser + 1, null));
-        List<User> users = new Read().getAllUsers();
+        int oldCountUsers = read.getAllUsers().size();
+        create.insertNewUser(new User(null, nameUser + 1, null));
+        List<User> users = read.getAllUsers();
         Assertions.assertEquals(oldCountUsers + 1, users.size());
     }
 
     @Test
     void getAllUsersWithOrderDependency() {
-        int oldCountUsers = new Read().getAllUsers().size();
-        int oldCountOrdersForUser = new Read().getUser(nameUser).getOrders().size();
+        int oldCountUsers = read.getAllUsers().size();
+        int oldCountOrdersForUser = read.getUser(nameUser).getOrders().size();
 
         String nameOrder = "Test order for dependency";
 
-        User newUser = new Read().getUser(nameUser);
-        new Create().insertNewOrder(new Order(null, nameOrder, newUser, 30D, null));
+        User newUser = read.getUser(nameUser);
+        create.insertNewOrder(new Order(null, nameOrder, newUser, 30D, null));
 
-        new Create().insertNewUser(new User(null, nameUser + 1, null));
+        create.insertNewUser(new User(null, nameUser + 1, null));
 
-        List<User> users = new Read().getAllUsers();
+        List<User> users = read.getAllUsers();
 
-        User userWithDepend = new Read().getUser(nameUser);
+        User userWithDepend = read.getUser(nameUser);
         Optional<Order> order = userWithDepend.getOrders().stream()
                 .filter((n) -> (nameOrder.equals(n.getNameOrder())))
                 .findFirst();
@@ -52,7 +63,7 @@ class ReadTest {
 
     @Test
     void getUserByName() {
-        User resultUser = new Read().getUser(nameUser);
+        User resultUser = read.getUser(nameUser);
 
         Assertions.assertEquals(resultUser.getNameUser(), nameUser);
     }
