@@ -1,5 +1,6 @@
-package by.andersenlab.hibernate;
+package by.andersenlab.hibernate.util.impl;
 
+import by.andersenlab.hibernate.util.HibernateUtil;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.hibernate.SessionFactory;
@@ -10,7 +11,6 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.springframework.stereotype.Component;
 
 @Component
-@AllArgsConstructor
 @Data
 public class HibernateUtilImpl implements HibernateUtil {
     private SessionFactory sessionFactory;

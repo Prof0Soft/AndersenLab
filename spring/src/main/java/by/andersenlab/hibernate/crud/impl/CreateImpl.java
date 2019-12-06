@@ -1,25 +1,29 @@
 package by.andersenlab.hibernate.crud.impl;
 
-import by.andersenlab.hibernate.HibernateUtil;
 import by.andersenlab.hibernate.crud.Create;
 import by.andersenlab.hibernate.crud.Read;
+import by.andersenlab.hibernate.util.HibernateUtil;
 import by.andersenlab.travelagency.model.Order;
 import by.andersenlab.travelagency.model.User;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Component;
 
+@Component
+@Profile(value = "!dev")
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class CreateImpl implements Create {
     @Autowired
     private HibernateUtil hibernateUtil;
     @Autowired
     private Read read;
+
+    public Create create() {
+        return this;
+    }
 
     public User insertNewUser(User user) {
         Transaction transaction = null;

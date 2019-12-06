@@ -1,4 +1,4 @@
-package by.andersenlab.hibernate;
+package by.andersenlab.hibernate.util;
 
 import org.hibernate.SessionFactory;
 

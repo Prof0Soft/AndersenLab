@@ -1,6 +1,6 @@
 package by.andersenlab.hibernate.crud.impl;
 
-import by.andersenlab.hibernate.HibernateUtil;
+import by.andersenlab.hibernate.util.HibernateUtil;
 import by.andersenlab.hibernate.crud.Update;
 import by.andersenlab.travelagency.model.Order;
 import by.andersenlab.travelagency.model.User;
@@ -10,7 +10,9 @@ import lombok.NoArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 @NoArgsConstructor
 @AllArgsConstructor
 @Data

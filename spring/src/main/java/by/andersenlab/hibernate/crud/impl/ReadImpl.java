@@ -1,6 +1,6 @@
 package by.andersenlab.hibernate.crud.impl;
 
-import by.andersenlab.hibernate.HibernateUtil;
+import by.andersenlab.hibernate.util.HibernateUtil;
 import by.andersenlab.hibernate.crud.Read;
 import by.andersenlab.travelagency.model.Order;
 import by.andersenlab.travelagency.model.User;
@@ -10,14 +10,17 @@ import lombok.NoArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.NoResultException;
 import java.util.List;
 
-@AllArgsConstructor
-@NoArgsConstructor
+@Component
+@Profile(value = "!dev")
 @Data
 public class ReadImpl implements Read {
+
     @Autowired
     private HibernateUtil hibernateUtil;
 

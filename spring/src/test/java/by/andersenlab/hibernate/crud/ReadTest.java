@@ -1,16 +1,20 @@
 package by.andersenlab.hibernate.crud;
 
-import by.andersenlab.config.ConfigSpring;
 import by.andersenlab.travelagency.model.Order;
 import by.andersenlab.travelagency.model.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.test.context.ActiveProfiles;
+import util.ViewSpringInfo;
 
 import java.util.List;
 import java.util.Optional;
 
+@ActiveProfiles("dev")
+@ComponentScan
 class ReadTest {
     private Read read;
     private Create create;
@@ -19,7 +23,12 @@ class ReadTest {
 
     @BeforeEach
     private void setUp() {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ConfigSpring.class);
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+        context.scan("./");
+        context.refresh();
+
+        ViewSpringInfo.showSpringBeansInfo();
+
         read = context.getBean(Read.class);
         create = context.getBean(Create.class);
 
